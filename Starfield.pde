@@ -1,15 +1,16 @@
-Particle []  parts  = new Particle[250];
+Particle []  parts  = new Particle[251];
 
 void setup()
 {
   size(600, 600);
   background(0);
   parts[0] = new oddParticle();
-  for ( int i=1; i<parts.length; i++)
+  for ( int i=1; i<parts.length-1; i++)
   {
     parts[i] = new normParticle();
    
   }
+  parts[250]= new jumboParticle();
 }
 
 void draw()
@@ -29,6 +30,14 @@ interface Particle
   public void show();
 }
 
+class jumboParticle extends normParticle
+{
+  jumboParticle()
+  { size=20;
+  }
+  
+    
+}
 class oddParticle implements Particle
 {
   double partX, partY, partRot, partSpeed;
@@ -68,7 +77,7 @@ class oddParticle implements Particle
 class normParticle implements Particle
 {
   double partX, partY, partRot, partSpeed;
-  int clrRed, clrGreen, clrBlue;
+  int clrRed, clrGreen, clrBlue, size;
   normParticle()
   {
     partX=300;
@@ -78,6 +87,7 @@ class normParticle implements Particle
     clrRed= (int)(Math.random()*255);
     clrGreen= (int)(Math.random()*255);
     clrBlue= (int)(Math.random()*255);
+    size=5;
   }
 
   void move()
@@ -97,6 +107,6 @@ class normParticle implements Particle
   void show()
   {
     fill(clrRed, clrGreen, clrBlue);
-    ellipse( (float)partX, (float)partY, 5, 5);
+    ellipse( (float)partX, (float)partY, size, size);
   }
 }
